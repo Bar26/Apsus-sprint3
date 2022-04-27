@@ -6,5 +6,9 @@
 @import url(../css/setUp/vars.css);
 
 @import url(cmp/header.css);
+<<<<<<< HEAD
 
 @import url(../apps/keep/css/note-list.css);
+=======
+@import url(mail/mail-preview.css);
+>>>>>>> eeecece39e9118953086a1aaf77fc2f158b7f829
