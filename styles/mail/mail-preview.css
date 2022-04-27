@@ -1,0 +1,9 @@
+.mail .star-container{
+    width:25px;
+    height: 25px;
+    background-image: url('../../img/star_border_black_20dp.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    opacity: 0.16;
+}
