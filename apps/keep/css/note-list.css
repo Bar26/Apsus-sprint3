@@ -1,0 +1,9 @@
+
+
+
+.note-list>*{
+    display: block;
+    width:150px;
+    height :150px;
+    background-color: aqua;
+}
