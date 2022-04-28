@@ -1,10 +1,10 @@
 *{
     box-sizing: border-box;
-    color: var(--color1);
+    /* color: var(--color1); */
 }
 
 html {
-    color: var(--color1);
+    /* color: var(--color1); */
     /* line-height: 1.71;
     font-family: monsterrat-regular, serif; */
 }

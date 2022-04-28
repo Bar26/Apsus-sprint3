@@ -11,15 +11,16 @@ export class Keep extends React.Component {
     state = {
         filterBy:null,
         notes: [],
-        inputType: 'txt'
+        inputType: 'txt',
+        type:'all',
     }
 
     componentDidMount() {
         setTimeout(this.loadNotes, 1000)
     }
 
-    loadNotes = () => {
-        noteService.query()
+    loadNotes = (type) => {
+        noteService.query(type)
             .then(notes => {
                 // console.log(notes)
                 return this.setState({ notes })
@@ -53,17 +54,16 @@ export class Keep extends React.Component {
         this.loadNotes()
     }
 
-    onSetFilter= (filterBy) => {
-        this.setState({ filterBy }, this.loadNotes)
-        const urlSrcPrm = new URLSearchParams(filterBy)
-        const searchStr = urlSrcPrm.toString()
-        this.props.history.push(`/car?${searchStr}`)
-    }
-
-    onSetColor = () => {
-
+    onFilter = ({ target }) => {
+        const val = target.value;
+        this.setState({type:val})
+        this.loadNotes(val);
     }
     
+    onPinNote = (bookId) => {
+        noteService.pinnedDown(bookId);
+        this.loadNotes()
+    }
 
     render() {
         const { notes, inputType } = this.state;
@@ -72,9 +72,9 @@ export class Keep extends React.Component {
         return <section>
 
             {/* <React.Fragment> */}
+            <NoteFilter onFilter={this.onFilter} />
             <AddNote onCreate={this.onCreate} />
-            <NoteFilter onSetFilter={this.onSetFilter}/>
-            <NoteList loadNotes={this.loadNotes} notes={notes} onDupNote={this.onDupNote} onDeleteNote={this.onDeleteNote} history={this.props.history}/>
+            <NoteList onPinNote={this.onPinNote} loadNotes={this.loadNotes} notes={notes} onDupNote={this.onDupNote} onDeleteNote={this.onDeleteNote} history={this.props.history}/>
             {/* <BookSearch addNewBook={this.addNewBook} books={books} /> */}
             {/* <BookFilter onSetFilter={this.onSetFilter} /> */}
             {/* <BookList books={books} /> */}

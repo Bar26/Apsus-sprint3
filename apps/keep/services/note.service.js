@@ -12,27 +12,22 @@ export const noteService = {
     createNote,
     add,
     dupNote,
-    setBGC
+    setBGC,
+    pinnedDown
 }
 
-function query() {
+function query(type) {
     let notes = _loadFromStorage()
     if (!notes) {
         notes = NoteData.getNotes()
         _saveToStorage(notes)
     }
-
-    // if (filterBy) {
-    //     let { bookName, minPrice, maxPrice } = filterBy
-    //     if (!minPrice) minPrice = 0
-    //     if (!maxPrice) maxPrice = Infinity
-
-    //     books = books.filter(book => {
-    //         return (book.title.toLowerCase().includes(bookName.toLowerCase()) &&
-    //             book.listPrice.amount <= maxPrice &&
-    //             book.listPrice.amount >= minPrice)
-    //     })
-    // }
+    if(type=== undefined) type='all'
+    if (type !== 'all') {
+        notes = notes.filter(note => {
+            return (note.type === type)
+        })
+    }
     return Promise.resolve(notes)
 }
 
@@ -54,7 +49,7 @@ function add(noteToAdd, type) {
     let newId = getNewId(lastId)
     noteToAdd.id = newId;
     noteToAdd.type = type;
-    if(!noteToAdd.style) noteToAdd.style={backgroundColor:'green'}
+    if (!noteToAdd.style) noteToAdd.style = { backgroundColor: 'green' }
     notes = [...notes, noteToAdd]
     _saveToStorage(notes)
 }
@@ -77,25 +72,38 @@ function dupNote(noteId) {
     add(copyNote, copyNote.type);
 }
 
-function setBGC(noteId, color) {
+function setBGC(noteId, color, field) {
     let notes = _loadFromStorage()
+    let newColor
     notes = notes.map(note => {
         if (note.id === noteId) {
             console.log(note)
-            if(!note.style){
-                color={backgroundColor:''}
-                note.style=color
+            if (!note.style) {
+                newColor = { backgroundColor: '', color: '' }
+                note.style = newColor
             }
-            note.style.backgroundColor = color;
+            console.log(color)
+            note.style[field] = color;
         }
         return note
     })
     _saveToStorage(notes)
 }
 
-function pinnedDown(bookId) {
-    let notes = _loadFromStorage();
+function setTxtColor(noteId, color) {
 
+}
+
+function pinnedDown(bookId) {
+    const ID = bookId - 100
+    let notes = _loadFromStorage();
+    for (var i = 0; i < ID; i++) {
+        notes[i].id++;
+    }
+    let pinnedNote = notes.splice(ID - 1, 1)
+    pinnedNote[0].id = 101
+    notes.unshift(pinnedNote[0]);
+    _saveToStorage(notes)
 }
 
 function createNote(id, type, title, txt) {

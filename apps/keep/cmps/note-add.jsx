@@ -11,12 +11,10 @@ export class AddNote extends React.Component {
                 txt: '',
                 label: '',
                 label: '',
-                todos:[],
-            }
+                todos: [],
+            },
+            inPinned: false
         },
-        style:{
-            backgroundColor:''
-        }
     }
 
     handleTypeChange = ({ target }) => {
@@ -27,17 +25,17 @@ export class AddNote extends React.Component {
     handleChange = ({ target }) => {
         const field = target.id
         let value;
-        if(field==='todos'){
+        if (field === 'todos') {
             value = target.value.split(',');
-            let objValueArr = value.map(txt=>{
-                return {txt}
+            let objValueArr = value.map(txt => {
+                return { txt }
             })
             this.setState((prevState) => ({ note: { ...prevState.note, info: { ...prevState.note.info, [field]: objValueArr } } }))
         }
-        else{
+        else {
             value = target.value
             this.setState((prevState) => ({ note: { ...prevState.note, info: { ...prevState.note.info, [field]: value } } }))
-        } 
+        }
     }
 
     renderByType = () => {
@@ -51,7 +49,8 @@ export class AddNote extends React.Component {
                 </React.Fragment>
             case 'note-img':
                 return <React.Fragment>
-                    תעלה תמונה יזיב
+                    <input type='text-area' placeholder='enter title' onChange={this.handleChange} id='title'></input>
+                    <input type='text-area' placeholder='enter image url' onChange={this.handleChange} id='url'></input>
                 </React.Fragment>
             case 'note-todos':
                 return <React.Fragment>
@@ -66,21 +65,33 @@ export class AddNote extends React.Component {
         console.log(event);
         event.target[0].value = ''
         event.target[1].value = ''
-        const {type} =this.state
+        const { type } = this.state
         if (!note) return console.log("ohhhh")
-        this.props.onCreate(note,type)
+        this.props.onCreate(note, type)
     }
 
     render() {
         const note = this.state.note
-        return <section className='select-note-type'>
+        return <section className='select-note-type main-layout'>
             <form className='add-note' onSubmit={() => this.onAdd(note)}>
                 <this.renderByType />
-                <button>Send</button>
+                <label>
+                    <button></button>
+                    <i className="fa-solid fa-cloud-arrow-up"></i>
+                </label>
             </form>
-            <button onClick={() => this.handleTypeChange(event)} key='note-txt' value='note-txt'>Text Note</button>
-            <button onClick={() => this.handleTypeChange(event)} key='note-img' value='note-img' >Image Note</button>
-            <button onClick={() => this.handleTypeChange(event)} key='note-todos' value='note-todos'>Todo List</button>
+            <label>
+                <button onClick={() => this.handleTypeChange(event)} key='note-txt' value='note-txt'></button>
+                <i className="fa-solid fa-comment-dots"></i>
+            </label>
+            <label>
+                <button onClick={() => this.handleTypeChange(event)} key='note-img' value='note-img' ></button>
+                <i className="fa-solid fa-images"></i>
+            </label>
+            <label>
+                <button onClick={() => this.handleTypeChange(event)} key='note-todos' value='note-todos'></button>
+                <i className="fa-solid fa-list"></i>
+            </label>
         </section>
     }
 

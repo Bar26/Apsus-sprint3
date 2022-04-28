@@ -12,6 +12,6 @@ export function NoteTxt (props){
 
     return <section className={props.note.id}>
         {titleCheck()}
-        <h3>{txt}</h3>
+        <h3 >{txt}</h3>
     </section>
 }

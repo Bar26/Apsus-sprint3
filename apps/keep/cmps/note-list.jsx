@@ -6,7 +6,7 @@ export class NoteList extends React.Component {
     // }
 
     render() {
-        return <section className="note-list grid">
+        return <section className="note-list grid main-layout">
         {/* Hello */}
         {this.props.notes.map(note => <NotePreview loadNotes={this.props.loadNotes} note={note} key={note.id} onDupNote={this.props.onDupNote} onDeleteNote={this.props.onDeleteNote}/>)}
     </section>
