@@ -3,9 +3,11 @@
 @import url(basic/layout.css);
 
 @import url(../css/setUp/fonts.css);
-@import url(../css/setUp/vars.css);
+@import url(setUp/vars.css);
 
 @import url(cmp/header.css);
 
 @import url(../apps/keep/css/note-list.css);
 @import url(mail/mail-preview.css);
+@import url(mail/mail-header.css);
+@import url(mail/mail-folders.css);
