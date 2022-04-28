@@ -7,5 +7,7 @@
 
 @import url(cmp/header.css);
 
+
 @import url(../apps/keep/css/note-list.css);
 @import url(mail/mail-preview.css);
+@import url(../cmps/user-msg.jsx);

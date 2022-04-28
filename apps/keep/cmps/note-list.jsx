@@ -1,8 +1,14 @@
 import { NotePreview } from './note-preview.jsx'
 
-export function NoteList({ notes }) {
-    return <section className="note-list">
+export class NoteList extends React.Component {
+    // state={
+    //     isPinned:false,
+    // }
+
+    render() {
+        return <section className="note-list grid">
         {/* Hello */}
-        {notes.map(note => <NotePreview note={note} key={note.id} />)}
+        {this.props.notes.map(note => <NotePreview loadNotes={this.props.loadNotes} note={note} key={note.id} onDupNote={this.props.onDupNote} onDeleteNote={this.props.onDeleteNote}/>)}
     </section>
+    }
 }
