@@ -5,7 +5,8 @@ export const mailService = {
     query,
     updateReadState,
     updateStarredState,
-    deleteMail
+    deleteMail,
+    addMail
 }
 
 
@@ -130,15 +131,23 @@ function query(critirea) {
 }
 
 function _createMail(subject, body, to) {
+    console.log('creating mail')
     const id = utilService.makeId
+    let status = to === 'user@appsus.com' ? 'inbox' : 'sent'
+    const from='Lee Sadot'
+    const sentAt = Date.now()
     const mail = {
         id,
+        from,
         subject,
         body,
         isRead: false,
-        sentAt: null,
-        to
+        isStarred: false,
+        sentAt,
+        to,
+        status
     }
+    return mail
 }
 
 function updateStarredState(mailToUpdate) {
@@ -153,7 +162,16 @@ function deleteMail(mailToDelete) {
     let mails = storageService.loadFromStorage(MAIL_KEY)
     const idx = mails.findIndex(mail => mail.id === mailToDelete.id)
     console.log(idx)
-    mails.splice(idx,1)
+    mails.splice(idx, 1)
     storageService.saveToStorage(MAIL_KEY, mails)
 }
- 
+
+function addMail(to, subject, body) {
+    console.log('adding a mail')
+    const mail= _createMail(to, subject, body)
+    let mails = storageService.loadFromStorage(MAIL_KEY)
+    mails.unshift(mail)
+    storageService.saveToStorage(MAIL_KEY, mails)
+    console.log(mails)
+}
+

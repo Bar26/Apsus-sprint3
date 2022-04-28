@@ -2,6 +2,9 @@ import { MailList } from "./cmps/mail-list.jsx"
 import { mailService } from "./mail-services/mail-service.js"
 import { MailHeader } from "./cmps/mail-header.jsx"
 import { FolderList } from "./cmps/folder-list.jsx"
+import { Compose } from "./cmps/compose-mail.jsx"
+
+const { Route, NavLink } = ReactRouterDOM
 
 export class Mail extends React.Component {
 
@@ -37,9 +40,7 @@ export class Mail extends React.Component {
 
     handleChange = ({ target }) => {
         const value = target.value
-        console.log(value)
         const field = target.name
-        console.log(field)
         this.setState((prevState) => ({ critiria: { ...prevState.critiria, [field]: value } }), () => this.loadMails())
 
     }
@@ -70,7 +71,7 @@ export class Mail extends React.Component {
     }
 
     componentDidUpdate() {
-        console.log(this.state)
+        console.log(this.props.history)
     }
 
     onUpdateCritiriaBooolian = (boolian) => {
@@ -78,9 +79,6 @@ export class Mail extends React.Component {
         this.setState((prevState) => ({ critiria: { ...prevState.critiria, [boolian]: !this.state.critiria[boolian] } }), () => this.loadMails())
     }
 
-    onCompose = () => {
-        
-    }
 
 
 
@@ -92,7 +90,10 @@ export class Mail extends React.Component {
             <section className="main-content flex clean-list">
                 <FolderList onCompose={this.onCompose} onUpdateCritiriaStatus={this.onUpdateCritiriaStatus} onUpdateCritiriaBooolian={this.onUpdateCritiriaBooolian} />
                 <MailList onDelete={this.onDelete} onUpdateStarredState={this.onUpdateStarredState} mails={mails} onUpdateReadState={this.onUpdateReadState} />
-
+                <NavLink to="/mail/compose">Compose</NavLink>
+                {/* <section> */}
+                <Route path="/mail/compose" component={Compose} />
+                {/* </section> */}
             </section>
             <section>
                 {/* <Switch>
