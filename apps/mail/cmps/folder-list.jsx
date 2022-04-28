@@ -2,7 +2,7 @@ export function FolderList({ onUpdateCritiriaStatus, onUpdateCritiriaBooolian })
 
 
     return <section className="main-layout" >
-        <button className="btn add">Compose +</button>
+        {/* <button className="btn add">Compose +</button> */}
         <ul className="folder-list flex column">
             <li className="flex align-center" onClick={() => onUpdateCritiriaStatus('inbox')}><div className="inbox-img-container flex align-center "></div><div className="inbox ">Inbox</div></li>
             <li className="flex align-center" onClick={() => onUpdateCritiriaBooolian('isStarred')}><div className="starred-img-container flex "></div><div className="starred ">Starred</div></li>
