@@ -12,8 +12,7 @@
 @import url(../apps/keep/css/note-add.css);
 @import url(../apps/keep/css/note-todo.css);
 @import url(mail/mail-preview.css);
-@import url(../cmps/user-msg.jsx);
+@import url(./cmp/user-msg.css);
 @import url(mail/mail-header.css);
 @import url(mail/mail-folders.css);
 @import url(mail/compose-mail.css);
-@import url(mail/details.css);

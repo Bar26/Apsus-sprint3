@@ -1,17 +1,10 @@
 import { eventBusService } from "../services/event-bus-service.js"
-const { Link } = ReactRouterDOM
 
 export class UserMsg extends React.Component {
 
     state = {
         msg:null
     }
-
-    // componentDidMount(){
-    //     eventBusService.on('user-msg',()=>{
-    //         this.setState({msg})
-    // })
-    // }
   
     removeEvent;
     timeOutId
@@ -19,8 +12,8 @@ export class UserMsg extends React.Component {
     componentDidMount() {
         console.log('user msg Mountedddd');
         this.removeEvent = eventBusService.on('user-msg', (msg) => {
-            console.log('msg from event listener', msg);
-            this.setState({ msg })
+            this.setState({msg})
+            // console.log('msg from event listener', this.state);
             if (this.timeoutId) clearTimeout(this.timeoutId)
             this.timeoutId = setTimeout(this.onCloseMsg, 3000)
         })
@@ -37,6 +30,7 @@ export class UserMsg extends React.Component {
     }
     
     
+    
  
     render() {
         // const { msg,onCloseMsg,currBookAdded } = this.props
@@ -48,6 +42,7 @@ export class UserMsg extends React.Component {
         // <button onClick={onCloseMsg}>X</button>
         // </div>
         const { msg } = this.state
+        console.log(msg)
         if (!msg) return <React.Fragment></React.Fragment>
         return <div className={`user-msg ${msg.type}`}>
             <button onClick={this.onCloseMsg}>X</button>

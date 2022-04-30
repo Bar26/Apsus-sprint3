@@ -5,6 +5,7 @@ import { eventBusService } from '../../services/event-bus-service.js'
 // import { NotePreview } from "./cmps/note-preview.jsx"
 import { NoteFilter } from './cmps/note-filter.jsx'
 import { SideBar } from './cmps/side-bar.jsx'
+import {UserMsg} from '../../cmps/user-msg.jsx'
 'use strict'
 
 
@@ -34,6 +35,7 @@ export class Keep extends React.Component {
         noteService.deleteNote(noteId)
             .then(() => {
                 console.log("hey")
+                this.loadNotes();
                 eventBusService.emit('user-msg', {
                     type: 'success', txt: 'Deleted car successfully'
                 })
@@ -43,7 +45,6 @@ export class Keep extends React.Component {
                     type: 'danger', txt: 'Could not delete car :('
                 })
             })
-        this.loadNotes();
     }
 
     onCreate = (note, type) => {
@@ -77,30 +78,25 @@ export class Keep extends React.Component {
 
     render() {
         const { notes, inputType } = this.state;
-        // console.log(notes)
-        // {if (!notes.length) return <h1>Loading...</h1>}
-        return <section className='app-notes grid main-layout'>
+        return <section className='app-notes main-layout'>
 
-            {/* <React.Fragment> */}
             <section className='upper flex column'>
                 <NoteFilter onFilter={this.onFilter} onSerchFiter={this.onSerchFiter} />
                 <AddNote onCreate={this.onCreate} />
             </section>
+
             <section className='notes main-layout'>
-                <h1>Pinned</h1>
+                <h1 className='notes-title-pin'>Pinned</h1>
                 <section className='note-list-pinned'>
                     <NoteList isPinned={true} onPinNote={this.onPinNote} loadNotes={this.loadNotes} notes={notes} onDupNote={this.onDupNote} onDeleteNote={this.onDeleteNote} history={this.props.history} />
                 </section>
-                <h1>Others</h1>
+                <h1 className='notes-title-pin not'>Others</h1>
                 <section className='note-list-not-pinned '>
                     <NoteList isPinned={false} onCreate={this.onCreate} onPinNote={this.onPinNote} loadNotes={this.loadNotes} notes={notes} onDupNote={this.onDupNote} onDeleteNote={this.onDeleteNote} history={this.props.history} />
-                    {/* <SideBar /> */}
                 </section>
             </section>
-            {/* <BookSearch addNewBook={this.addNewBook} books={books} /> */}
-            {/* <BookFilter onSetFilter={this.onSetFilter} /> */}
-            {/* <BookList books={books} /> */}
-            {/* </React.Fragment> */}
+
+            <UserMsg />
         </section>
     }
 }

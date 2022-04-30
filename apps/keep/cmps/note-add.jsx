@@ -46,23 +46,23 @@ export class AddNote extends React.Component {
         switch (type) {
             case 'note-txt':
                 return <React.Fragment>
-                    <input type='text-area' placeholder='enter title' onChange={this.handleChange} id='title'></input>
-                    <input type='text-area' placeholder='enter text' onChange={this.handleChange} id='txt'></input>
+                    <input type='text-area' placeholder='Enter Title' onChange={this.handleChange} id='title'></input>
+                    <input type='text-area' placeholder='Enter Text' onChange={this.handleChange} id='txt'></input>
                 </React.Fragment>
             case 'note-img':
                 return <React.Fragment>
                     <input type='text-area' placeholder='enter title' onChange={this.handleChange} id='title'></input>
-                    <input type='text-area' placeholder='enter image url' onChange={this.handleChange} id='url'></input>
+                    <input type='text-area' placeholder='Enter Image Url' onChange={this.handleChange} id='url'></input>
                 </React.Fragment>
             case 'note-video':
                 return <React.Fragment>
-                    <input type='text-area' placeholder='enter title' onChange={this.handleChange} id='title'></input>
-                    <input type='text-area' placeholder='enter embeded video url' onChange={this.handleChange} id='url'></input>
+                    <input type='text-area' placeholder='Enter Title' onChange={this.handleChange} id='title'></input>
+                    <input type='text-area' placeholder='Enter Embeded Video Url' onChange={this.handleChange} id='url'></input>
                 </React.Fragment>
             case 'note-todos':
                 return <React.Fragment>
-                    <input type='text-area' placeholder='enter title' onChange={this.handleChange} id='title'></input>
-                    <input type='text-area' placeholder='enter comma seperated list' onChange={this.handleChange} id='todos'></input>
+                    <input type='text-area' placeholder='Enter Title' onChange={this.handleChange} id='title'></input>
+                    <input type='text-area' placeholder='Enter Comma Seperated List' onChange={this.handleChange} id='todos'></input>
                 </React.Fragment>
         }
     }

@@ -23,8 +23,8 @@ const gNotes = [
             txt: "Fullstack Me Baby!"
         },
         style: {
-            backgroundColor: "",
-            color:"f121212"
+            backgroundColor: "#dfa9a9",
+            color:"whitesmoke"
         }
 
     },
@@ -34,11 +34,11 @@ const gNotes = [
         isPinned: true,
         info: {
             url: 'https://www.sweety.co.il/media/catalog/product/cache/1/image/830x519/9df78eab33525d08d6e5fb8d27136e95/f/i/file_51_32.jpg',
-            title: "גרמניה עולה באש"
+            title: "Theres Maccabi Only In Haifa"
         },
         style: {
-            backgroundColor: "green",
-            color:"525252"
+            backgroundColor: "#66d673",
+            color:"#999494"
         }
     },
     {
@@ -49,12 +49,19 @@ const gNotes = [
             title: "Get my stuff together",
             todos: [
                 { txt: "Driving liscence", doneAt: null },
-                { txt: "Coding power", doneAt: 187111111 }
+                { txt: "Coding power", doneAt: 187111111 },
+                { txt: "Can I Get Encore", doneAt: null },
+                { txt: "Do You Want More", doneAt: null },
+                { txt: "How Many Get Shots?", doneAt: null },
+                { txt: "Alot", doneAt: 187111111 },
+                { txt: "In The Hood", doneAt: null },
+                { txt: "They All Say Like", doneAt: 187111111 },
+                { txt: "50 You Hot", doneAt: 187111111 },
             ]
         },
         style: {
-            backgroundColor: "#00d",
-            color:"whitesmoke"
+            backgroundColor: "#d7c6c6",
+            color:"#a169ce"
         }
     },
     {
@@ -66,8 +73,8 @@ const gNotes = [
             url:"https://www.youtube.com/embed/C5zSsJ5CU54",
         },
         style: {
-            backgroundColor: "#00d",
-            color:"whitesmoke"
+            backgroundColor: "#9b8af0",
+            color:"f121212"
         }
     },
     {
@@ -79,8 +86,8 @@ const gNotes = [
             url:"https://i.makeagif.com/media/7-12-2017/g06Fx7.gif",
         },
         style: {
-            backgroundColor: "#00d",
-            color:"whitesmoke"
+            backgroundColor: "#926868",
+            color:"#d5becb"
         }
     }
 ];

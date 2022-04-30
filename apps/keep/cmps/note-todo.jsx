@@ -36,6 +36,7 @@ export class NoteToDo extends React.Component {
     }
 
     onAddToDo = (noteId) => {
+        event.preventDefault()
         let val=event.target[0].value;
         let todo={txt:val,doneAt:null}
         noteService.addTodo(noteId, todo);

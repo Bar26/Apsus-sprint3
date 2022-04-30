@@ -16,7 +16,7 @@
 
 .todo-delete{
     align-self: center;
-    padding-left: 15px;
+    padding-left: 1rem;
 }
 .todo-delete i{
     cursor: pointer;
@@ -29,11 +29,11 @@
 }
 
 .todo-li input {
-    margin-top: 20px;
+    margin-top: 1.25rem;
     background-color: transparent;
     border: none;
     height: 2rem;
-    width: 30rem;
+    width: 25rem;
 }
 
 .todo .li-to-scroll {

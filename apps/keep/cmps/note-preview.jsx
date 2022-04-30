@@ -29,33 +29,10 @@ export class NotePreview extends React.Component {
     //     this.setState((prevState) => ({ footerStyle: { ...prevState.footerStyle, [field]: value } }))
     // }
 
-    componentDidMount()  {
+
+    // componentDidUpdate() {
         // console.log(this.state)
-        // console.log(this.state)
-        //     this.removeEvent = eventBusService.on('get-note',(note)=>{
-        //         console.log(note)
-        //       this.setState({noteFromMail:note},()=>console.log(this.state.noteFromMail))
-        //   })
-
-        eventBusService.on('get-note', (note) => {
-            console.log(note)
-            // console.log('str from header', str)
-            // this.setState({ noteFromMail:note },()=>{
-            //     console.log('cdsishvkjebnfewnsssd')
-            // })
-            console.log(this.props)
-            this.props.onCreate(note,'note-txt')
-        })
-
-
-    }
-    componentWillUnmount() {
-        // this.removeEvent()
-    }
-
-    componentDidUpdate() {
-        console.log(this.state)
-    }
+    // }
 
     setColor = (noteId) => {
         const color = event.target.value

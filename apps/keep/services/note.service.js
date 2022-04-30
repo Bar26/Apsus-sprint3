@@ -59,7 +59,7 @@ function deleteNote(noteId) {
 
 
 function add(noteToAdd, type) {
-    console.log(noteToAdd)
+    // console.log(noteToAdd)
     let notes = _loadFromStorage()
     const lastId = notes[notes.length - 1].id
     let newId = getNewId(lastId)

@@ -24,10 +24,11 @@ export class MailPreview extends React.Component {
     // }
 
     onSendMailToNote=(mail)=>{
-        const note={info:{title:mail.subject, txt: mail.body}}
+        // console.log(mail)
+        const note={info:{title:mail.subject, txt: mail.body},isPinned:false}
         console.log(note)
         this.setState({note},()=>{
-            eventBusService.emit('get-note', note)
+            return eventBusService.emit('get-note', note)
         }) 
     }
 
