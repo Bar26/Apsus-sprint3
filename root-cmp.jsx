@@ -11,6 +11,7 @@ const {Route, Switch} = ReactRouterDOM
 
 export function Main() {
     return <Router>
+        <section className="all-content">
             <Header/>
         <section className="app">
             <main>
@@ -24,7 +25,7 @@ export function Main() {
                    
                 </Switch>
             </main>
-        </section>
+        </section></section>
     </Router>
 }
 

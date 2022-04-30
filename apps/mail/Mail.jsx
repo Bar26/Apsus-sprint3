@@ -141,7 +141,7 @@ export class Mail extends React.Component {
                     <NavLink to="/mail/compose" className="compose-link">Compose <img className="plus-icon" src="../../img/plus-icon.png" /></NavLink>
                     <FolderList onUpdateCritiriaCategory={this.onUpdateCritiriaCategory} onToggleFolder={this.onToggleFolder} inputRef={this.inputRef} onCompose={this.onCompose} onUpdateCritiriaStatus={this.onUpdateCritiriaStatus} onUpdateCritiriaBooolian={this.onUpdateCritiriaBooolian} />
                 </section>
-                <section className="flex column">
+                <section className="sort-and-list flex column">
                     <SortMails onSort={this.onSort} ></SortMails>
                     <MailList  onUpdateMailCategory={this.onUpdateMailCategory} onUpdateMailStatus={this.onUpdateMailStatus} onDelete={this.onDelete} onUpdateStarredState={this.onUpdateStarredState} mails={mails} onUpdateReadState={this.onUpdateReadState} />
                 </section>

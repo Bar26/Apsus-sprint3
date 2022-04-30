@@ -56,7 +56,7 @@ export class Compose extends React.Component {
             <div className="new-email flex " >New Email</div>
             <form onSubmit={this.onAddMail} className="mail-form flex column">
                 <input  className="to" type="email" placeholder="To" name="to" />
-                <input value={this.valueRender} ref={this.inputRef2}  className="subject" type="text" placeholder="subject" name="subject" />
+                <input  ref={this.inputRef2}  className="subject" type="text" placeholder="subject" name="subject" />
                 <textarea ref={this.inputRef3} className="body" type="text" name="body" />
                 <button value="sendbtn" className="send">Send</button>
                 <button value="btnn" className="to-draft">✖</button>

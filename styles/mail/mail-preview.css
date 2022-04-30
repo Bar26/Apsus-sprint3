@@ -10,8 +10,13 @@
     border-bottom: .5px rgba(211, 211, 211, 0.301) solid;
     padding: 0.315em;
     display: relative;
-
+    justify-content: space-between;
     
+}
+
+.mail .star-and-from{
+    align-items: center;
+    gap:15px;
 }
 
 .mail.read{
@@ -128,7 +133,7 @@
 }
 
 .mail .subject {
-    width:10rem;
+    width:15rem;
 }
 
 .mail .body {
@@ -160,3 +165,6 @@
     opacity: 1;
 }
 
+.sort-and-list{
+    flex:1
+}
