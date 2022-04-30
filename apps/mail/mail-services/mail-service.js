@@ -6,7 +6,12 @@ export const mailService = {
     updateReadState,
     updateStarredState,
     deleteMail,
-    addMail
+    addMail,
+    getById,
+    ReadPrecentage,
+    sort,
+    updateMailStatus,
+    updateMailCategory
 }
 
 
@@ -27,7 +32,8 @@ const gMails = [
         sentAt: Date.now(),
         from: 'Rachel Green',
         to: 'user@appsus.com',
-        status: 'inbox'
+        status: 'inbox',
+        labels: ['friends']
     },
     {
         id: 'e102',
@@ -38,7 +44,56 @@ const gMails = [
         sentAt: Date.now(),
         from: 'joey tribbiani',
         to: 'user@appsus.com',
-        status: 'inbox'
+        status: 'inbox',
+        labels: ['friends']
+    },
+    {
+        id: 'e109',
+        subject: 'join us for 99$',
+        body: 'Would you like to join dolor sit amet consectetur adipisicing elit. Voluptates magnam porro, dolorum est error fuga itaque minima veniam consectetur incidunt, doloremque dolorem! Qui culpa vitae voluptatem facilis et placeat praesentium',
+        isRead: false,
+        isStarred: false,
+        sentAt: Date.now(),
+        from: 'Netflix',
+        to: 'user@appsus.com',
+        status: 'inbox',
+        labels: ['Promotions']
+    },
+    {
+        id: 'e110',
+        subject: 'Sahbak',
+        body: 'we got jobs for you. Voluptates magnam porro, dolorum est error fuga itaque minima veniam consectetur incidunt, doloremque dolorem! Qui culpa vitae voluptatem facilis et placeat praesentium',
+        isRead: false,
+        isStarred: false,
+        sentAt: Date.now(),
+        from: 'Sahbak',
+        to: 'user@appsus.com',
+        status: 'inbox',
+        labels: ['spam']
+    },
+    {
+        id: 'e112',
+        subject: 'Sahbak',
+        body: 'we got jobs for you. Voluptates magnam porro, dolorum est error fuga itaque minima veniam consectetur incidunt, doloremque dolorem! Qui culpa vitae voluptatem facilis et placeat praesentium',
+        isRead: false,
+        isStarred: false,
+        sentAt: Date.now(),
+        from: 'Sahbak',
+        to: 'user@appsus.com',
+        status: 'inbox',
+        labels: ['spam']
+    },
+    {
+        id: 'e111',
+        subject: 'Sahbak',
+        body: 'we got jobs for you. Voluptates magnam porro, dolorum est error fuga itaque minima veniam consectetur incidunt, doloremque dolorem! Qui culpa vitae voluptatem facilis et placeat praesentium',
+        isRead: false,
+        isStarred: false,
+        sentAt: Date.now(),
+        from: 'Sahbak',
+        to: 'user@appsus.com',
+        status: 'inbox',
+        labels: ['spam']
     },
     {
         id: 'e103',
@@ -49,7 +104,8 @@ const gMails = [
         sentAt: Date.now(),
         from: 'Monica Geler',
         to: 'user@appsus.com',
-        status: 'inbox'
+        status: 'inbox',
+        labels: ['friends']
     },
     {
         id: 'e104',
@@ -60,7 +116,8 @@ const gMails = [
         sentAt: Date.now(),
         from: 'Ross Geller',
         to: 'user@appsus.com',
-        status: 'inbox'
+        status: 'inbox',
+        labels: ['friends', 'family']
     },
     {
         id: 'e105',
@@ -71,7 +128,8 @@ const gMails = [
         sentAt: 1251132930294,
         from: 'Chendler Bing',
         to: 'user@appsus.com',
-        status: 'inbox'
+        status: 'inbox',
+        labels: ['friends']
     },
     {
         id: 'e106',
@@ -82,7 +140,20 @@ const gMails = [
         sentAt: 1551133930594,
         from: 'pheobe buffay',
         to: 'user@appsus.com',
-        status: 'sent'
+        status: 'sent',
+        labels: []
+    },
+    {
+        id: 'e120',
+        subject: 'want to cath up❤',
+        body: 'Would love to catch up sometime i psum dolor sit amet consectetur adipisicing elit. Voluptates magnam porro, dolorum est error fuga itaque minima veniam consectetur incidunt, doloremque dolorem! Qui culpa vitae voluptatem facilis et placeat praesentium',
+        isRead: false,
+        isStarred: false,
+        sentAt: 1551133930594,
+        from: 'pheobe buffay',
+        to: 'user@appsus.com',
+        status: 'inbox',
+        labels: ['friends,family']
     }
 ]
 
@@ -107,37 +178,32 @@ function updateReadState(mailToUpdate) {
 
 function query(critirea) {
     let mails
-    console.log(critirea)
     mails = storageService.loadFromStorage(MAIL_KEY)
     if (!mails || !mails.length) {
         mails = gMails
         storageService.saveToStorage(MAIL_KEY, mails)
     }
 
-    // if(!critirea.status||!critirea.txt||!critirea.isRead||!critirea.isStared) return Promise.resolve(mails)
     mails = mails.filter(mail => mail.status === critirea.status && (mail.body.includes(critirea.txt) ||
         mail.subject.includes(critirea.txt) || mail.from.includes(critirea.txt)))
+    if (critirea.category) mails=mails.filter(mail=>mail.labels.includes(critirea.category))
     if (critirea.isRead !== null && critirea.isRead !== 'all') {
-        console.log(critirea.isRead)
-        console.log(critirea.isRead)
         mails = mails.filter(mail => {
-
             return mail.isRead + '' === critirea.isRead
         })
     }
     if (critirea.isStarred) mails = mails.filter(mail => mail.isStarred)
-    console.log(mails)
     return Promise.resolve(mails)
 }
 
-function _createMail(subject, body, to) {
-    console.log('creating mail')
-    const id = utilService.makeId
-    let status = to === 'user@appsus.com' ? 'inbox' : 'sent'
-    const from='Lee Sadot'
+function _createMail(to, subject, body, statusDraft) {
+    const id = utilService.makeId()
+    let status
+    if (!statusDraft) status = to + '' === 'user@appsus.com' ? 'inbox' : 'sent'
+    else status = statusDraft
+    const from = 'Lee Sadot'
     const sentAt = Date.now()
     const mail = {
-        id,
         from,
         subject,
         body,
@@ -145,8 +211,11 @@ function _createMail(subject, body, to) {
         isStarred: false,
         sentAt,
         to,
-        status
+        status,
+        id: id,
+        removedAt: ''
     }
+    console.log(id)
     return mail
 }
 
@@ -166,12 +235,69 @@ function deleteMail(mailToDelete) {
     storageService.saveToStorage(MAIL_KEY, mails)
 }
 
-function addMail(to, subject, body) {
-    console.log('adding a mail')
-    const mail= _createMail(to, subject, body)
+function addMail(to, subject, body, status) {
+    const mail = _createMail(to, subject, body, status)
     let mails = storageService.loadFromStorage(MAIL_KEY)
     mails.unshift(mail)
     storageService.saveToStorage(MAIL_KEY, mails)
-    console.log(mails)
 }
 
+function getById(mailId) {
+    const mails = storageService.loadFromStorage(MAIL_KEY)
+    const mail = mails.find(_mail => _mail.id === mailId)
+    return Promise.resolve(mail)
+}
+
+function ReadPrecentage() {
+    let mails = storageService.loadFromStorage(MAIL_KEY)
+    if (!mails) mails = gMails
+    const readMails = mails.reduce(function (acc, mail) {
+        if (mail.isRead && mail.status === 'inbox') acc++
+        return acc
+    }, 0)
+    const readQuant = readMails
+    const precentage = (readQuant / mails.length) * 100
+    return precentage
+}
+
+function sort(sortBy) {
+    console.log('sorting', sortBy)
+    let mails = storageService.loadFromStorage(MAIL_KEY)
+    if (sortBy === 'date') {
+        console.log('by date')
+        mails.sort((mail1, mail2) => mail2.sentAt - mail1.sentAt)
+    }
+
+    if (sortBy === 'subject') {
+        console.log('sorting by subject')
+        mails.sort(function (mail1, mail2) {
+            const subject1 = mail1.subject.toUpperCase();
+            const subject2 = mail2.subject.toUpperCase();
+            if (subject1 < subject2) {
+                return -1;
+            }
+            if (subject1 > subject2) {
+                return 1;
+            }
+            return 0;
+
+        })
+    }
+    storageService.saveToStorage(MAIL_KEY, mails)
+}
+
+function updateMailStatus(mailToUpdate, status) {
+    let mails = storageService.loadFromStorage(MAIL_KEY)
+    mailToUpdate.status = status
+    mails = mails.map(mail => mail.id === mailToUpdate.id ? mailToUpdate : mail)
+    storageService.saveToStorage(MAIL_KEY, mails)
+}
+
+function updateMailCategory(mailToUpdate,category){
+    console.log(mailToUpdate,category)
+    let mails = storageService.loadFromStorage(MAIL_KEY)
+    mailToUpdate.labels.push(category)
+    console.log(mailToUpdate)
+    mails = mails.map(mail => mail.id === mailToUpdate.id ? mailToUpdate : mail )
+    storageService.saveToStorage(MAIL_KEY, mails)
+}

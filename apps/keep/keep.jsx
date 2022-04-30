@@ -17,6 +17,9 @@ export class Keep extends React.Component {
 
     componentDidMount() {
         setTimeout(this.loadNotes, 1000)
+ 
+     
+
     }
 
     loadNotes = (type) => {

@@ -3,6 +3,8 @@ import { NoteTxt } from "./note-txt.jsx";
 import { NoteImg } from "./note-img.jsx";
 import { NoteToDo } from "./note-todo.jsx";
 import { noteService } from "../services/note.service.js";
+import { eventBusService } from "../../../services/event-bus-service.js";
+
 
 // import React from 'react';
 // import { faHome } from "@fortawesome/free-solid-svg-icons";
@@ -23,6 +25,11 @@ export class NotePreview extends React.Component {
     // handleStyleChange = (field, value) => {
     //     this.setState((prevState) => ({ footerStyle: { ...prevState.footerStyle, [field]: value } }))
     // }
+
+    componentDidMount(){
+        eventBusService.emit('get-note')
+    
+    }
 
     setColor = (noteId) => {
         const color = event.target.value
