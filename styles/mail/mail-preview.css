@@ -1,10 +1,19 @@
+.mail-list-container{
+    margin-inline-start: 20px;
+
+    
+}
+
 .mail {
     gap: 20px;
     color: var(--color1);
+    border-bottom: .5px rgba(211, 211, 211, 0.301) solid;
+    padding: 0.315em;
+    
 }
 
 .mail.read{
-    background-color: rgba(237, 229, 229, 0.571);
+    background-color: rgba(242,245,245,0.8);
  
 }
 
@@ -13,6 +22,11 @@
     font-weight:550;
     
 
+}
+
+.mail .body{
+    display: flex;
+    justify-content: flex-start;
 }
 
 .mail>* {
@@ -24,6 +38,8 @@
     cursor: pointer;
     
 }
+
+
 
 
 
@@ -52,6 +68,18 @@
     opacity: 0.16;
 }
 
+.mail .categories-container{
+    width: 30px;
+    height: 30px;
+    background-image: url('../../img/categories-icon.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    opacity: 0.16;
+    border: none;
+    
+}
+
 
 
 
@@ -60,7 +88,7 @@
 }
 
 .mail .subject {
-    width: 10em;
+    width:10rem;
 }
 
 .mail .body {

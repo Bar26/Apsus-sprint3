@@ -1,3 +1,21 @@
+.compose-link{
+    margin-inline-start: 0.8rem;
+    box-shadow: 0 1px 2px .5px rgb(60 64 67 / 30%);
+    border-radius: 50px;
+    margin-bottom: 20px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.plus-icon{
+    width: 30px;
+}
+
 .compose-mail{
     position: absolute;
     bottom: 0;
@@ -19,8 +37,22 @@
     color: white;
     padding: 0.3125em;
     padding-left: 1em;
+    display: flex;
+    align-items: center;
     
 }
+
+.to-draft{
+    background-color: transparent;
+    color: gray;
+    font-size: 1em;
+    position: absolute; 
+    bottom:95%;
+    left: 95%;
+    
+
+}
+
 
 .compose-mail .mail-form{
     /* height: 100%; */

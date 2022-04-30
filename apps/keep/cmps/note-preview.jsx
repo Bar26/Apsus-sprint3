@@ -5,6 +5,10 @@ import { NoteToDo } from "./note-todo.jsx";
 import { NoteVideo } from "./note-video.jsx";
 import { noteService } from "../services/note.service.js";
 import { eventBusService } from "../../../services/event-bus-service.js";
+<<<<<<< HEAD
+=======
+
+>>>>>>> 78c6ecf4600f94f88dae6b95e43571d9b4f4ba71
 
 // import React from 'react';
 // import { faHome } from "@fortawesome/free-solid-svg-icons";
@@ -27,15 +31,11 @@ export class NotePreview extends React.Component {
     //     this.setState((prevState) => ({ footerStyle: { ...prevState.footerStyle, [field]: value } }))
     // }
 
-    componentDidMount() {
-        eventBusService.on('note-to-mail',()=>{return this.state.note})
+    componentDidMount(){
+        eventBusService.emit('get-note')
+    
     }
 
-    onSendToMail = (note) =>{
-        console.log(note)
-        this.setState({note},()=> {console.log(this.state)})
-    }
-    
     setColor = (noteId) => {
         const color = event.target.value
         const field = event.target.name
