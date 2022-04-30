@@ -1,15 +1,13 @@
-
-
 .select-note-type {
-    display:flex;
-    /* align-items: center; */
+    display: flex;
+    align-items: center;
     justify-content: center;
-    padding: 0.45rem;
+    padding: 1rem;
     padding-inline-start: 1rem;
-    margin: 2rem auto;
+    margin: auto;
     box-shadow: 1px 2px 0 rgb(60 64 67 / 30%), 0 1px 3px 1px rgb(60 64 67 / 15%);
     border-radius: 8px;
-    width:fit-content
+    width: fit-content
 }
 
 .select-note-type button {
@@ -19,9 +17,17 @@
     height: 0;
 }
 
+
+.select-note-type label {
+    align-self: center;
+    cursor: pointer;
+}
+
 .select-note-type input {
     /* background-color: transparent; */
     border: none;
+    height: 2rem;
+    width: 15rem;
 }
 
 .add-note {
@@ -36,6 +42,6 @@
     display: flex;
     text-align: center;
     justify-content: center;
-    margin-top:20px;
+    margin-top: 20px;
 
 }

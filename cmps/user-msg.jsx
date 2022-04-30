@@ -3,9 +3,9 @@ const { Link } = ReactRouterDOM
 
 export class UserMsg extends React.Component {
 
-    // state = {
-    //     msg:null
-    // }
+    state = {
+        msg:null
+    }
 
     // componentDidMount(){
     //     eventBusService.on('user-msg',()=>{
@@ -13,15 +13,22 @@ export class UserMsg extends React.Component {
     // })
     // }
   
+    removeEvent;
     timeOutId
 
     componentDidMount(){
         if(this.timeOutId) clearTimeout(this.timeOutId)
         this.timeOutId = setTimeout(this.props.onCloseMsg, 3000);
     }
-    componentDidUpdate(){
-        if(this.timeOutId) clearTimeout(this.timeOutId)
-        this.timeOutId = setTimeout(this.props.onCloseMsg, 3000);
+
+
+    componentWillUnmount() {
+        this.removeEvent()
+    }
+
+    onCloseMsg = () => {
+        this.setState({ msg: null })
+        clearTimeout(this.timeoutId)
     }
     
     

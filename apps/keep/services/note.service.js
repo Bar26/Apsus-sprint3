@@ -13,17 +13,36 @@ export const noteService = {
     add,
     dupNote,
     setBGC,
-    pinnedDown
+    pinnedDown,
+    todoClick,
+    deleteTodo,
+    addTodo,
+
 }
 
-function query(type) {
+function query(type, val) {
     let notes = _loadFromStorage()
     if (!notes) {
         notes = NoteData.getNotes()
         _saveToStorage(notes)
     }
-    if(type=== undefined) type='all'
-    if (type !== 'all') {
+    if (type === undefined) type = 'all'
+    if (val || val === '' && type === 'txt') {
+        notes = notes.filter(note => {
+            if (note.type === 'note-todos') {
+                note.info.todos.find(obj => {
+                    if (obj.txt.includes(val)) return note
+                })
+            }
+            else if (note.type === 'note-txt') {
+                if (note.info.txt.includes(val)) return note
+            }
+            if (note.info.title) {
+                if (note.info.title.includes(val)) return note
+            }
+        });
+    }
+    else if (type !== 'all') {
         notes = notes.filter(note => {
             return (note.type === type)
         })
@@ -38,10 +57,6 @@ function deleteNote(noteId) {
     return Promise.resolve()
 }
 
-// function saveCar(note) {
-//     if (note.id) return _update(note)
-//     else return _add(note)
-// }
 
 function add(noteToAdd, type) {
     let notes = _loadFromStorage()
@@ -77,12 +92,10 @@ function setBGC(noteId, color, field) {
     let newColor
     notes = notes.map(note => {
         if (note.id === noteId) {
-            console.log(note)
             if (!note.style) {
                 newColor = { backgroundColor: '', color: '' }
                 note.style = newColor
             }
-            console.log(color)
             note.style[field] = color;
         }
         return note
@@ -90,19 +103,12 @@ function setBGC(noteId, color, field) {
     _saveToStorage(notes)
 }
 
-function setTxtColor(noteId, color) {
-
-}
-
-function pinnedDown(bookId) {
-    const ID = bookId - 100
+function pinnedDown(noteId) {
+    // const ID = noteId - 100
     let notes = _loadFromStorage();
-    for (var i = 0; i < ID; i++) {
-        notes[i].id++;
-    }
-    let pinnedNote = notes.splice(ID - 1, 1)
-    pinnedNote[0].id = 101
-    notes.unshift(pinnedNote[0]);
+    notes.find(note => {
+        if (note.id === noteId) note.isPinned = !note.isPinned
+    })
     _saveToStorage(notes)
 }
 
@@ -117,11 +123,51 @@ function createNote(id, type, title, txt) {
     return _update(note)
 }
 
+function todoClick(noteId, todo) {
+    let notes = _loadFromStorage();
+    let newNotes = notes.map((note) => {
+        if (note.id === noteId && note.type === 'note-todos') {
+            note.info.todos.forEach(todoA => {
+                if (todoA.txt === todo.txt && todoA.doneAt) todoA.doneAt = null
+                else if (todoA.txt === todo.txt && !todoA.doneAt) todoA.doneAt = + new Date
+            })
+        }
+        return note
+    })
+    _saveToStorage(newNotes)
+}
+
+function addTodo(noteId, todo){
+    console.log(todo)
+    let notes = _loadFromStorage();
+    let newNotes = notes.map((note) => {
+        if (note.id === noteId && note.type === 'note-todos') {
+            note.info.todos.push(todo);
+        }
+        return note
+    })
+    _saveToStorage(newNotes)
+
+}
+
+function deleteTodo(noteId, todo, todoIdx) {
+    let notes = _loadFromStorage();
+    let newNotes = notes.map((note) => {
+        if (note.id === noteId && note.type === 'note-todos') {
+            note.info.todos.splice(todoIdx, 1);
+        }
+        return note
+    })
+    _saveToStorage(newNotes)
+}
+
 function _findNote(noteId) {
     let notes = _loadFromStorage()
     let resNote = notes.find(note => (note.id === noteId))
     return resNote
 }
+
+
 
 function _saveToStorage(notes) {
     storageService.saveToStorage(NOTE_KEY, notes)

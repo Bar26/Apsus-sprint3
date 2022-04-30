@@ -3,32 +3,31 @@ import { NoteList } from './cmps/note-list.jsx'
 import { AddNote } from '../keep/cmps/note-add.jsx'
 import { eventBusService } from '../../services/event-bus-service.js'
 // import { NotePreview } from "./cmps/note-preview.jsx"
-import {NoteFilter} from './cmps/note-filter.jsx'
+import { NoteFilter } from './cmps/note-filter.jsx'
+import { SideBar } from './cmps/side-bar.jsx'
 'use strict'
 
 
 export class Keep extends React.Component {
     state = {
-        filterBy:null,
+        filterBy: null,
         notes: [],
         inputType: 'txt',
-        type:'all',
+        type: 'all',
     }
 
     componentDidMount() {
         setTimeout(this.loadNotes, 1000)
     }
 
-    loadNotes = (type) => {
-        noteService.query(type)
+    loadNotes = (type,val) => {
+        noteService.query(type,val)
             .then(notes => {
-                // console.log(notes)
                 return this.setState({ notes })
             })
     }
 
     onDeleteNote = (noteId) => {
-        console.log(noteId)
         noteService.deleteNote(noteId)
             .then(() => {
                 eventBusService.emit('user-msg', {
@@ -43,9 +42,9 @@ export class Keep extends React.Component {
         this.loadNotes();
     }
 
-    onCreate = (note,type) => {
+    onCreate = (note, type) => {
         // console.log(note)
-        noteService.add(note,type)
+        noteService.add(note, type)
         this.loadNotes();
     }
 
@@ -56,10 +55,17 @@ export class Keep extends React.Component {
 
     onFilter = ({ target }) => {
         const val = target.value;
-        this.setState({type:val})
+        this.setState({ type: val })
         this.loadNotes(val);
     }
     
+    onSerchFiter=({target})=>{
+        const val = target.value;
+        const type = target.name
+        this.setState({type:type})
+        this.loadNotes(type,val)
+    }
+
     onPinNote = (bookId) => {
         noteService.pinnedDown(bookId);
         this.loadNotes()
@@ -69,12 +75,24 @@ export class Keep extends React.Component {
         const { notes, inputType } = this.state;
         // console.log(notes)
         // {if (!notes.length) return <h1>Loading...</h1>}
-        return <section>
+        return <section className='app-notes grid main-layout'>
 
             {/* <React.Fragment> */}
-            <NoteFilter onFilter={this.onFilter} />
-            <AddNote onCreate={this.onCreate} />
-            <NoteList onPinNote={this.onPinNote} loadNotes={this.loadNotes} notes={notes} onDupNote={this.onDupNote} onDeleteNote={this.onDeleteNote} history={this.props.history}/>
+            <section className='upper flex column'>
+                <NoteFilter onFilter={this.onFilter} onSerchFiter={this.onSerchFiter} />
+                <AddNote onCreate={this.onCreate} />
+            </section>
+            <section className='notes main-layout'>
+                <h1>Pinned</h1>
+                <section className='note-list-pinned'>
+                    <NoteList isPinned={true} onPinNote={this.onPinNote} loadNotes={this.loadNotes} notes={notes} onDupNote={this.onDupNote} onDeleteNote={this.onDeleteNote} history={this.props.history} />
+                </section>
+                <h1>Others</h1>
+                <section className='note-list-not-pinned '>
+                    <NoteList isPinned={false} onPinNote={this.onPinNote} loadNotes={this.loadNotes} notes={notes} onDupNote={this.onDupNote} onDeleteNote={this.onDeleteNote} history={this.props.history} />
+                    {/* <SideBar /> */}
+                </section>
+            </section>
             {/* <BookSearch addNewBook={this.addNewBook} books={books} /> */}
             {/* <BookFilter onSetFilter={this.onSetFilter} /> */}
             {/* <BookList books={books} /> */}

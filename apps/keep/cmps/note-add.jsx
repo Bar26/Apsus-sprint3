@@ -1,3 +1,4 @@
+import { eventBusService } from "../../../services/event-bus-service"
 
 
 
@@ -6,6 +7,7 @@ export class AddNote extends React.Component {
         type: 'note-txt',
         note: {
             id: '',
+            isPinned: false,
             info: {
                 url: '',
                 txt: '',
@@ -13,9 +15,9 @@ export class AddNote extends React.Component {
                 label: '',
                 todos: [],
             },
-            inPinned: false
         },
     }
+
 
     handleTypeChange = ({ target }) => {
         const type = target.value
@@ -28,7 +30,7 @@ export class AddNote extends React.Component {
         if (field === 'todos') {
             value = target.value.split(',');
             let objValueArr = value.map(txt => {
-                return { txt }
+                return { txt , doneAt:null }
             })
             this.setState((prevState) => ({ note: { ...prevState.note, info: { ...prevState.note.info, [field]: objValueArr } } }))
         }
@@ -52,6 +54,11 @@ export class AddNote extends React.Component {
                     <input type='text-area' placeholder='enter title' onChange={this.handleChange} id='title'></input>
                     <input type='text-area' placeholder='enter image url' onChange={this.handleChange} id='url'></input>
                 </React.Fragment>
+            case 'note-video':
+                return <React.Fragment>
+                    <input type='text-area' placeholder='enter title' onChange={this.handleChange} id='title'></input>
+                    <input type='text-area' placeholder='enter embeded video url' onChange={this.handleChange} id='url'></input>
+                </React.Fragment>
             case 'note-todos':
                 return <React.Fragment>
                     <input type='text-area' placeholder='enter title' onChange={this.handleChange} id='title'></input>
@@ -62,7 +69,6 @@ export class AddNote extends React.Component {
 
     onAdd = (note) => {
         event.preventDefault()
-        console.log(event);
         event.target[0].value = ''
         event.target[1].value = ''
         const { type } = this.state
@@ -77,20 +83,24 @@ export class AddNote extends React.Component {
                 <this.renderByType />
                 <label>
                     <button></button>
-                    <i className="fa-solid fa-cloud-arrow-up"></i>
+                    <i className="fa-solid fa-cloud-arrow-up" title='Upload Note'></i>
                 </label>
             </form>
             <label>
                 <button onClick={() => this.handleTypeChange(event)} key='note-txt' value='note-txt'></button>
-                <i className="fa-solid fa-comment-dots"></i>
+                <i className="fa-solid fa-comment-dots" title='Add Note Text'></i>
             </label>
             <label>
                 <button onClick={() => this.handleTypeChange(event)} key='note-img' value='note-img' ></button>
-                <i className="fa-solid fa-images"></i>
+                <i className="fa-solid fa-images" title='Add Note Image'></i>
+            </label>
+            <label>
+                <button onClick={() => this.handleTypeChange(event)} key='note-video' value='note-video' ></button>
+                <i className="fa-brands fa-youtube" title='Add Note Video'></i>
             </label>
             <label>
                 <button onClick={() => this.handleTypeChange(event)} key='note-todos' value='note-todos'></button>
-                <i className="fa-solid fa-list"></i>
+                <i className="fa-solid fa-list" title='Add Note To Do List'></i>
             </label>
         </section>
     }

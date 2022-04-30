@@ -4,7 +4,7 @@ export function NoteImg (props){
 
     const title = props.note.info.title
     const url = props.note.info.url
-    
+    const type = props.note
     function titleCheck(){
         if(title) return <h1>{title}</h1>
     }
@@ -13,6 +13,5 @@ export function NoteImg (props){
     return <React.Fragment>
         <img src={url}/>
         {titleCheck()}
-        {/* <h3>{txt}</h3> */}
     </React.Fragment>
 }
