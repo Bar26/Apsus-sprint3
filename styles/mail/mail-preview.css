@@ -9,6 +9,8 @@
     color: var(--color1);
     border-bottom: .5px rgba(211, 211, 211, 0.301) solid;
     padding: 0.315em;
+    display: relative;
+
     
 }
 
@@ -38,6 +40,44 @@
     cursor: pointer;
     
 }
+
+.choose-category.close{
+    display: none;
+ 
+}
+
+
+
+.choose-category{
+    /* position:relative;
+    right: 20%;
+    background-color: white;
+    top:20%;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.057);
+    padding: 10px;
+    z-index: 30; */
+    position: absolute;
+    left:80%;
+    /* top:19%; */
+    background: fixed;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.257);
+    padding: 5px;
+    font-weight: lighter;
+    
+}
+
+.mail .send-note{
+    width: 30px;
+    height: 30px;
+    background-image: url('../../img/convert-to-note.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 20px;
+    opacity: 0.16;
+}
+
+
 
 
 
@@ -77,7 +117,7 @@
     background-size: 20px;
     opacity: 0.16;
     border: none;
-    
+
 }
 
 
@@ -92,7 +132,7 @@
 }
 
 .mail .body {
-    width: 45em;
+    width: 25em;
     font-weight: 500;
     color: rgb(105, 104, 104);
 }

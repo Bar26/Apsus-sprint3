@@ -20,7 +20,7 @@ export class NotePreview extends React.Component {
             color: '',
             // fonstSize: '',
         },
-        noteFromMail: ''
+        mailFromNote:''
     }
 
     removeEvent;
@@ -29,10 +29,48 @@ export class NotePreview extends React.Component {
     //     this.setState((prevState) => ({ footerStyle: { ...prevState.footerStyle, [field]: value } }))
     // }
 
-
-    // componentDidUpdate() {
+    componentDidMount() {
         // console.log(this.state)
-    // }
+        // console.log(this.state)
+        //     this.removeEvent = eventBusService.on('get-note',(note)=>{
+        //         console.log(note)
+        //       this.setState({noteFromMail:note},()=>console.log(this.state.noteFromMail))
+        //   })
+
+        eventBusService.on('get-note', (note) => {
+            console.log(note)
+            // console.log('str from header', str)
+            // this.setState({ noteFromMail:note },()=>{
+            //     console.log('cdsishvkjebnfewnsssd')
+            // })
+            console.log(this.props)
+            this.props.onCreate(note, 'note-txt')
+        })
+
+
+    }
+    componentWillUnmount() {
+        // this.removeEvent()
+    }
+
+    componentDidUpdate() {
+        // console.log(this.state)
+    }
+
+    onSendNoteToMail = (note) => {
+ 
+        let mail
+        if(note.type ==='note-txt'){
+            mail= {  subject: note.info.title, body: note.info.txt }
+
+        }  
+        else return
+        
+        this.setState({ mailFromNote:mail }, () => {
+            console.log(mail)
+            eventBusService.emit('note-to-mail', mail)
+        })
+    }
 
     setColor = (noteId) => {
         const color = event.target.value
@@ -79,9 +117,9 @@ export class NotePreview extends React.Component {
                     <i className="fa-solid fa-copy"></i>
                 </label>
                 {/* <label className="note-to-mail" title="To Mail">
-                    <button onClick={() => this.onSendToMail(note)} ></button>
+                    <button onClick={() => this.onSendNoteToMail(note)} ></button>
                     <i className="fa-solid fa-copy"></i>
-                </label> */}
+                </label>  */}
                 <label className="pin-note" title="Pin Up">
                     <button onClick={() => this.onPinNote(note.id)} ></button>
                     <i className="fa-solid fa-thumbtack"></i>
