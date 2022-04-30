@@ -93,14 +93,17 @@ export class NotePreview extends React.Component {
     //     this.setState((prevState) => ({ footerStyle: { ...prevState.footerStyle, [field]: value } }))
     // }
 
+
+
+
     render() {
         const note = this.props.note
         let style = { backgroundColor: note.style.backgroundColor, color: note.style.color }
         const { type, noteStyle } = note;
 
         // console.log(this.props.note)
-        return <section style={style} className="note-preview" >
-            <section className="note">
+        return <section style={style} className="note-preview"  >
+            <section draggable className="note" onDragStart={()=>this.props.handleDragStart(event,note)} >
                 <DynamicCmp loadNotes={this.props.loadNotes} onDeleteNote={this.props.onDeleteNote} note={this.props.note} type={type} />
             </section>
             <div className='note-preview-btn'>
@@ -123,10 +126,10 @@ export class NotePreview extends React.Component {
                 <label className="pin-note" title="Pin Up">
                     <button onClick={() => this.onPinNote(note.id)} ></button>
                     <i className="fa-solid fa-thumbtack"></i>
-                    <label className="edit-note" title='Edit'>
+                    {/* <label className="edit-note" title='Edit'>
                         <button onClick={() => this.onEditNote(note.id)} ></button>
                         <i className="fa-solid fa-pen-to-square"></i>
-                    </label>
+                    </label> */}
                 </label>
                 <label className="delete-note" title="Delete">
                     <button onClick={() => this.props.onDeleteNote(note.id)}  ></button>

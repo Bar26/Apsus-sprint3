@@ -76,6 +76,8 @@ export class Keep extends React.Component {
         this.loadNotes()
     }
 
+   
+
     render() {
         const { notes, inputType } = this.state;
         return <section className='app-notes main-layout'>

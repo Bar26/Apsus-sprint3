@@ -65,7 +65,7 @@ function add(noteToAdd, type) {
     let newId = getNewId(lastId)
     noteToAdd.id = newId;
     noteToAdd.type = type;
-    if(!noteToAdd.isPinned)noteToAdd.isPinned=false;
+    if (!noteToAdd.isPinned) noteToAdd.isPinned = false;
     if (!noteToAdd.style) noteToAdd.style = { backgroundColor: 'green' }
     notes = [...notes, noteToAdd]
     _saveToStorage(notes)
@@ -105,14 +105,19 @@ function setBGC(noteId, color, field) {
     _saveToStorage(notes)
 }
 
-function pinnedDown(noteId) {
-    // const ID = noteId - 100
+function pinnedDown(noteId, bool) {
     let notes = _loadFromStorage();
-    notes.find(note => {
-        if (note.id === noteId) note.isPinned = !note.isPinned
+    notes.find((note) => {
+        if (note.id === noteId && bool !== undefined) {
+            note.isPinned = !bool
+        }
+        else if (note.id === noteId && bool === undefined) {
+            note.isPinned = !note.isPinned
+        }
     })
     _saveToStorage(notes)
 }
+
 
 function createNote(id, type, title, txt) {
     let note = {
@@ -139,7 +144,7 @@ function todoClick(noteId, todo) {
     _saveToStorage(newNotes)
 }
 
-function addTodo(noteId, todo){
+function addTodo(noteId, todo) {
     console.log(todo)
     let notes = _loadFromStorage();
     let newNotes = notes.map((note) => {
