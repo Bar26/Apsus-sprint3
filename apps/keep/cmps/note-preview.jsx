@@ -20,7 +20,7 @@ export class NotePreview extends React.Component {
             color: '',
             // fonstSize: '',
         },
-        noteFromMail: ''
+        mailFromNote:''
     }
 
     removeEvent;
@@ -29,7 +29,7 @@ export class NotePreview extends React.Component {
     //     this.setState((prevState) => ({ footerStyle: { ...prevState.footerStyle, [field]: value } }))
     // }
 
-    componentDidMount()  {
+    componentDidMount() {
         // console.log(this.state)
         // console.log(this.state)
         //     this.removeEvent = eventBusService.on('get-note',(note)=>{
@@ -44,7 +44,7 @@ export class NotePreview extends React.Component {
             //     console.log('cdsishvkjebnfewnsssd')
             // })
             console.log(this.props)
-            this.props.onCreate(note,'note-txt')
+            this.props.onCreate(note, 'note-txt')
         })
 
 
@@ -54,7 +54,22 @@ export class NotePreview extends React.Component {
     }
 
     componentDidUpdate() {
-        console.log(this.state)
+        // console.log(this.state)
+    }
+
+    onSendNoteToMail = (note) => {
+ 
+        let mail
+        if(note.type ==='note-txt'){
+            mail= {  subject: note.info.title, body: note.info.txt }
+
+        }  
+        else return
+        
+        this.setState({ mailFromNote:mail }, () => {
+            console.log(mail)
+            eventBusService.emit('note-to-mail', mail)
+        })
     }
 
     setColor = (noteId) => {
@@ -102,7 +117,7 @@ export class NotePreview extends React.Component {
                     <i className="fa-solid fa-copy"></i>
                 </label>
                 <label className="note-to-mail" title="To Mail">
-                    <button onClick={() => this.onSendToMail(note)} ></button>
+                    <button onClick={() => this.onSendNoteToMail(note)} ></button>
                     <i className="fa-solid fa-copy"></i>
                 </label>
                 <label className="pin-note" title="Pin Up">

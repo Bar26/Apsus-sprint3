@@ -27,6 +27,7 @@ export class Mail extends React.Component {
         }
     }
     inputRef = React.createRef()
+  
 
 
     removeEvent;
@@ -129,6 +130,8 @@ export class Mail extends React.Component {
 
 
 
+
+
     render() {
         const { mails } = this.state
         return <section>
@@ -140,7 +143,7 @@ export class Mail extends React.Component {
                 </section>
                 <section className="flex column">
                     <SortMails onSort={this.onSort} ></SortMails>
-                    <MailList onUpdateMailCategory={this.onUpdateMailCategory} onUpdateMailStatus={this.onUpdateMailStatus} onDelete={this.onDelete} onUpdateStarredState={this.onUpdateStarredState} mails={mails} onUpdateReadState={this.onUpdateReadState} />
+                    <MailList  onUpdateMailCategory={this.onUpdateMailCategory} onUpdateMailStatus={this.onUpdateMailStatus} onDelete={this.onDelete} onUpdateStarredState={this.onUpdateStarredState} mails={mails} onUpdateReadState={this.onUpdateReadState} />
                 </section>
                 {/* <section> */}
                 <Switch>

@@ -17,12 +17,13 @@
 }
 
 .compose-mail{
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 1.6rem;
     width: 500px;
     height: 500px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.257);
+    z-index: 20;
     
  
 }
@@ -30,6 +31,8 @@
 .compose-mail>*{
     padding: 0;
     margin: 0;
+    background-color: white;
+    
 }
 
 .compose-mail .new-email{
@@ -100,4 +103,5 @@
     border-radius: 5px;
     margin-left: 1em;
     margin-bottom: .5em;;
+    z-index: 20;
 }
