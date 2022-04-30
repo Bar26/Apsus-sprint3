@@ -28,7 +28,7 @@ export class NotePreview extends React.Component {
     // }
 
     componentDidMount() {
-        eventBusService.emit('note-to-mail',()=>{return this.state.note})
+        eventBusService.on('note-to-mail',()=>{return this.state.note})
     }
 
     onSendToMail = (note) =>{
