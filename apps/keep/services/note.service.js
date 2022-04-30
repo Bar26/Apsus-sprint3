@@ -59,11 +59,13 @@ function deleteNote(noteId) {
 
 
 function add(noteToAdd, type) {
+    console.log(noteToAdd)
     let notes = _loadFromStorage()
     const lastId = notes[notes.length - 1].id
     let newId = getNewId(lastId)
     noteToAdd.id = newId;
     noteToAdd.type = type;
+    if(!noteToAdd.isPinned)noteToAdd.isPinned=false;
     if (!noteToAdd.style) noteToAdd.style = { backgroundColor: 'green' }
     notes = [...notes, noteToAdd]
     _saveToStorage(notes)

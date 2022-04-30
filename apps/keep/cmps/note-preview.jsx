@@ -13,22 +13,48 @@ import { eventBusService } from "../../../services/event-bus-service.js";
 
 export class NotePreview extends React.Component {
     state = {
-        note:null,
+        note: null,
         type: 'x',
         noteStyle: {
             backgroundColor: '',
             color: '',
             // fonstSize: '',
         },
+        noteFromMail: ''
     }
+
+    removeEvent;
 
     // handleStyleChange = (field, value) => {
     //     this.setState((prevState) => ({ footerStyle: { ...prevState.footerStyle, [field]: value } }))
     // }
 
-    componentDidMount(){
-        eventBusService.emit('get-note')
-    
+    componentDidMount()  {
+        // console.log(this.state)
+        // console.log(this.state)
+        //     this.removeEvent = eventBusService.on('get-note',(note)=>{
+        //         console.log(note)
+        //       this.setState({noteFromMail:note},()=>console.log(this.state.noteFromMail))
+        //   })
+
+        eventBusService.on('get-note', (note) => {
+            console.log(note)
+            // console.log('str from header', str)
+            // this.setState({ noteFromMail:note },()=>{
+            //     console.log('cdsishvkjebnfewnsssd')
+            // })
+            console.log(this.props)
+            this.props.onCreate(note,'note-txt')
+        })
+
+
+    }
+    componentWillUnmount() {
+        // this.removeEvent()
+    }
+
+    componentDidUpdate() {
+        console.log(this.state)
     }
 
     setColor = (noteId) => {
@@ -64,7 +90,7 @@ export class NotePreview extends React.Component {
             </section>
             <div className='note-preview-btn'>
                 <label className="palette-bgc" title="Set BGC Color">
-                    <input type="color" name="backgroundColor" className="input-color" onChange={(ev) => this.setColor(note.id)}/>
+                    <input type="color" name="backgroundColor" className="input-color" onChange={(ev) => this.setColor(note.id)} />
                     <i className="fa-solid fa-palette"></i>
                 </label>
                 <label className="palette-txt" title="Set Text Color">
@@ -82,10 +108,10 @@ export class NotePreview extends React.Component {
                 <label className="pin-note" title="Pin Up">
                     <button onClick={() => this.onPinNote(note.id)} ></button>
                     <i className="fa-solid fa-thumbtack"></i>
-                <label className="edit-note" title='Edit'>
-                    <button onClick={() => this.onEditNote(note.id)} ></button>
-                    <i className="fa-solid fa-pen-to-square"></i>
-                </label>
+                    <label className="edit-note" title='Edit'>
+                        <button onClick={() => this.onEditNote(note.id)} ></button>
+                        <i className="fa-solid fa-pen-to-square"></i>
+                    </label>
                 </label>
                 <label className="delete-note" title="Delete">
                     <button onClick={() => this.props.onDeleteNote(note.id)}  ></button>
@@ -112,7 +138,7 @@ function DynamicCmp(props) {
         case 'note-todos': {
             return <NoteToDo loadNotes={props.loadNotes} onDeleteNote={props.onDeleteNote} note={props.note} />
         }
-        case 'note-video':{
+        case 'note-video': {
             return <NoteVideo onDeleteNote={props.onDeleteNote} note={props.note} />
         }
     }

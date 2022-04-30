@@ -92,7 +92,7 @@ export class Keep extends React.Component {
                 </section>
                 <h1>Others</h1>
                 <section className='note-list-not-pinned '>
-                    <NoteList isPinned={false} onPinNote={this.onPinNote} loadNotes={this.loadNotes} notes={notes} onDupNote={this.onDupNote} onDeleteNote={this.onDeleteNote} history={this.props.history} />
+                    <NoteList isPinned={false} onCreate={this.onCreate} onPinNote={this.onPinNote} loadNotes={this.loadNotes} notes={notes} onDupNote={this.onDupNote} onDeleteNote={this.onDeleteNote} history={this.props.history} />
                     {/* <SideBar /> */}
                 </section>
             </section>
