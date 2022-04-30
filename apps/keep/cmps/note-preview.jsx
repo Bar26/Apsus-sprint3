@@ -75,10 +75,10 @@ export class NotePreview extends React.Component {
                     <button onClick={() => this.props.onDupNote(note.id)} ></button>
                     <i className="fa-solid fa-copy"></i>
                 </label>
-                <label className="note-to-mail" title="To Mail">
+                {/* <label className="note-to-mail" title="To Mail">
                     <button onClick={() => this.onSendToMail(note)} ></button>
                     <i className="fa-solid fa-copy"></i>
-                </label>
+                </label> */}
                 <label className="pin-note" title="Pin Up">
                     <button onClick={() => this.onPinNote(note.id)} ></button>
                     <i className="fa-solid fa-thumbtack"></i>

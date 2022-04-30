@@ -33,6 +33,7 @@ export class Keep extends React.Component {
     onDeleteNote = (noteId) => {
         noteService.deleteNote(noteId)
             .then(() => {
+                console.log("hey")
                 eventBusService.emit('user-msg', {
                     type: 'success', txt: 'Deleted car successfully'
                 })

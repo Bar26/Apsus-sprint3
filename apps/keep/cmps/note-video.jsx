@@ -6,7 +6,7 @@ export function NoteVideo(props) {
     const title = props.note.info.title
     const url = props.note.info.url
     function titleCheck() {
-        console.log(url)
+        // console.log(url)
         if (title) return <h1>{title}</h1>
     }
 
