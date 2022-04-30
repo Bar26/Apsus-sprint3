@@ -114,7 +114,7 @@ const gMails = [
         isRead: false,
         isStarred: false,
         sentAt: Date.now(),
-        from: 'Ross Geller',
+        from: 'Noam Bar',
         to: 'user@appsus.com',
         status: 'inbox',
         labels: ['friends', 'family']
@@ -126,10 +126,10 @@ const gMails = [
         isRead: true,
         isStarred: false,
         sentAt: 1251132930294,
-        from: 'Chendler Bing',
+        from: 'Adika',
         to: 'user@appsus.com',
         status: 'inbox',
-        labels: ['friends']
+        labels: ['promotions','spam']
     },
     {
         id: 'e106',
@@ -144,17 +144,55 @@ const gMails = [
         labels: []
     },
     {
-        id: 'e120',
-        subject: 'want to cath up❤',
-        body: 'Would love to catch up sometime i psum dolor sit amet consectetur adipisicing elit. Voluptates magnam porro, dolorum est error fuga itaque minima veniam consectetur incidunt, doloremque dolorem! Qui culpa vitae voluptatem facilis et placeat praesentium',
+        id: 'e121',
+        subject: 'your order has been shipped',
+        body: 'your order is up sometime i psum dolor sit amet consectetur adipisicing elit. Voluptates magnam porro, dolorum est error fuga itaque minima veniam consectetur incidunt, doloremque dolorem! Qui culpa vitae voluptatem facilis et placeat praesentium',
         isRead: false,
         isStarred: false,
         sentAt: 1551133930594,
-        from: 'pheobe buffay',
+        from: 'Ali Express',
         to: 'user@appsus.com',
         status: 'inbox',
-        labels: ['friends,family']
+        labels: ['promotions,spam']
+    },
+    {
+        id: 'e122',
+        subject: 'weekly study reminder',
+        body: 'new study arrived i psum dolor sit amet consectetur adipisicing elit. Voluptates magnam porro, dolorum est error fuga itaque minima veniam consectetur incidunt, doloremque dolorem! Qui culpa vitae voluptatem facilis et placeat praesentium',
+        isRead: false,
+        isStarred: false,
+        sentAt: 1551133930594,
+        from: 'Tau Psychology',
+        to: 'user@appsus.com',
+        status: 'inbox',
+        labels: ['promotions,spam']
+    },
+    {
+        id: 'e123',
+        subject: 'National Security',
+        body: 'hello, up sometime i psum dolor sit amet consectetur adipisicing elit. Voluptates magnam porro, dolorum est error fuga itaque minima veniam consectetur incidunt, doloremque dolorem! Qui culpa vitae voluptatem facilis et placeat praesentium',
+        isRead: false,
+        isStarred: false,
+        sentAt: 1551133930594,
+        from: 'National Security',
+        to: 'user@appsus.com',
+        status: 'inbox',
+        labels: ['promotions,spam']
+    },
+    {
+        id: 'e124',
+        subject: 'invite to GitHub',
+        body: 'Would love to catch up sometime i psum dolor sit amet consectetur adipisicing elit. Voluptates magnam porro, dolorum est error fuga itaque minima veniam consectetur incidunt, doloremque dolorem! Qui culpa vitae voluptatem facilis et placeat praesentium',
+        isRead: false,
+        isStarred: true,
+        sentAt: 1551133930594,
+        from: 'Bar Ivri',
+        to: 'barevry@gmail.com',
+        status: 'sent',
+        labels: ['friends']
     }
+ 
+
 ]
 
 const email = {

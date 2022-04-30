@@ -114,6 +114,10 @@
 
 }
 
+.folder-list>*{
+    cursor: pointer;
+}
+
 .folder-list .categories-content{
     margin: 0;
     align-self: stretch;
