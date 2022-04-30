@@ -10,7 +10,7 @@ export class NoteList extends React.Component {
         {/* Hello */}
         {this.props.notes.map(note => {
             if(this.props.isPinned===note.isPinned)
-            return <NotePreview loadNotes={this.props.loadNotes} note={note} key={note.id} onDupNote={this.props.onDupNote} onDeleteNote={this.props.onDeleteNote}/>
+            return <NotePreview onCreate={this.props.onCreate} loadNotes={this.props.loadNotes} note={note} key={note.id} onDupNote={this.props.onDupNote} onDeleteNote={this.props.onDeleteNote}/>
         })}
     </section>
     }

@@ -8,19 +8,29 @@ export class MailPreview extends React.Component {
 
 
     state={
-
+        note:''
     }
 
     
     componentDidMount(){
-        this.removeEvent = eventBusService.on('get-note', () => {
-            console.log('getting from brother')
-        })
+        // const note=this.state.note
+        //  eventBusService.emit('get-note',note)
+        // console.log(noteFromMail)
+        // eventBusService.emit('get-note', note)
     }
     
     // componentWillUnmount() {
     //     this.removeEvent()
     // }
+
+    onSendMailToNote=(mail)=>{
+        const note={info:{title:mail.subject, txt: mail.body}}
+        console.log(note)
+        this.setState({note},()=>{
+            eventBusService.emit('get-note', note)
+        }) 
+    }
+
 
 
     render(){
@@ -48,6 +58,7 @@ export class MailPreview extends React.Component {
         <span className="subject flex">{mail.subject} </span>
         <Link to={`/mail/${mail.id}`}><ShortenTxt text={text} /></Link>
         <span className="date flex">{dateToShow}</span>
+        <div className="send-note" onClick={()=>this.onSendMailToNote(mail)}> send mail to note</div>
        
         <div className="delete-container" onClick={()=>onUpdateMailStatus(mail,'trash')} ></div>
         <div className="categories-container" ></div>
