@@ -5,11 +5,6 @@ import { NoteToDo } from "./note-todo.jsx";
 import { NoteVideo } from "./note-video.jsx";
 import { noteService } from "../services/note.service.js";
 import { eventBusService } from "../../../services/event-bus-service.js";
-<<<<<<< HEAD
-=======
-
->>>>>>> 78c6ecf4600f94f88dae6b95e43571d9b4f4ba71
-
 // import React from 'react';
 // import { faHome } from "@fortawesome/free-solid-svg-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
