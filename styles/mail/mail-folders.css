@@ -105,7 +105,7 @@
 
 .read-quant .precentage {
     height: 100%;
-    background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
+    background: #f69c3c9f;
     color:var(--color1);
     font-size: 0.9rem;
     display: flex;
@@ -133,7 +133,7 @@
 
 }
 
-.folder-list .categories-content.open{
+.folder-list .categories-content.close{
     display: none;
 }
 

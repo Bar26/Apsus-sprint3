@@ -44,12 +44,12 @@ export class Mail extends React.Component {
     }
 
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps) {  console.log(this.props)
+   
         if (prevProps.location.pathname !== this.props.location.pathname) {
-            console.log(prevProps.match.params, this.props.match.params)
             this.loadMails()
         }
-        console.log(this.state)
+      
     }
 
 
@@ -90,9 +90,9 @@ export class Mail extends React.Component {
     }
 
     onUpdateCritiriaStatus = (status) => {
-        console.log('updating')
         this.setState((prevState) => ({ critiria: { ...prevState.critiria, status } }), () => this.loadMails())
         this.setState((prevState) => ({ critiria: { ...prevState.critiria, category: '' } }), () => this.loadMails())
+        this.setState((prevState) => ({ critiria: { ...prevState.critiria, isStarred: false } }), () => this.loadMails())
         this.props.history.push('/mail')
 
     }
@@ -114,7 +114,8 @@ export class Mail extends React.Component {
 
     onUpdateCritiriaBooolian = (boolian) => {
 
-        this.setState((prevState) => ({ critiria: { ...prevState.critiria, [boolian]: !this.state.critiria[boolian] } }), () => this.loadMails())
+        // this.setState((prevState) => ({ critiria: { ...prevState.critiria, [boolian]: !this.state.critiria[boolian] } }), () => this.loadMails())
+        this.setState((prevState) => ({ critiria: { ...prevState.critiria, [boolian]: true } }), () => this.loadMails())
     }
 
     onSort = ({ target }) => {
@@ -124,7 +125,7 @@ export class Mail extends React.Component {
     }
 
     onToggleFolder = () => {
-        this.inputRef.current.classList.toggle('open')
+        this.inputRef.current.classList.toggle('close')
     }
 
 
@@ -138,7 +139,7 @@ export class Mail extends React.Component {
             <MailHeader handleChange={this.handleChange} />
             <section className="main-content flex clean-list">
                 <section className="menu flex column">
-                    <NavLink to="/mail/compose" className="compose-link">Compose <img className="plus-icon" src="../../img/plus-icon.png" /></NavLink>
+                    <NavLink to="/mail/compose" className="compose-link main-layout">Compose <img className="plus-icon" src="../../img/plus-icon.png" /></NavLink>
                     <FolderList onUpdateCritiriaCategory={this.onUpdateCritiriaCategory} onToggleFolder={this.onToggleFolder} inputRef={this.inputRef} onCompose={this.onCompose} onUpdateCritiriaStatus={this.onUpdateCritiriaStatus} onUpdateCritiriaBooolian={this.onUpdateCritiriaBooolian} />
                 </section>
                 <section className="sort-and-list flex column">

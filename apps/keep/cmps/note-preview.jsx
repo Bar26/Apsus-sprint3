@@ -10,8 +10,8 @@ import { eventBusService } from "../../../services/event-bus-service.js";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 // import { faPalette } from "@fortawesome/free-solid-svg-icons";
 // import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-export class NotePreview extends React.Component {
+const { withRouter } = ReactRouterDOM;
+ class _NotePreview extends React.Component {
     state = {
         note: null,
         type: 'x',
@@ -65,11 +65,9 @@ export class NotePreview extends React.Component {
 
         }  
         else return
+        this.props.history.push(`/mail/compose?subject=${mail.subject}&body=${mail.body}`)
         
-        this.setState({ mailFromNote:mail }, () => {
-            console.log(mail)
-            eventBusService.emit('note-to-mail', mail)
-        })
+
     }
 
     setColor = (noteId) => {
@@ -124,10 +122,10 @@ export class NotePreview extends React.Component {
                     <button onClick={() => this.props.onDupNote(note.id)} ></button>
                     <i className="fa-solid fa-copy"></i>
                 </label>
-                {/* <label className="note-to-mail" title="To Mail">
+                <label className="note-to-mail" title="To Mail">
                     <button onClick={() => this.onSendNoteToMail(note)} ></button>
                     <i className="fa-solid fa-copy"></i>
-                </label>  */}
+                </label> 
                 <label className="pin-note" title="Pin Up">
                     <button onClick={() => this.onPinNote(note.id)} ></button>
                     <i className="fa-solid fa-thumbtack"></i>
@@ -166,3 +164,5 @@ function DynamicCmp(props) {
         }
     }
 }
+
+export const NotePreview = withRouter(_NotePreview);

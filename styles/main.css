@@ -1,3 +1,4 @@
+
 @import url(basic/basic.css);
 @import url(basic/helpers.css);
 @import url(basic/layout.css);
@@ -22,3 +23,6 @@
 @import url(mail/compose-mail.css);
 @import url(mail/sort.css);
 @import url(mail/filter-by-read.css);
+@import url(mail/details.css);
+
+@import url(mq/mq.css)

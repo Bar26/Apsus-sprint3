@@ -97,6 +97,7 @@ function setBGC(noteId, color, field) {
             if (!note.style) {
                 newColor = { backgroundColor: '', color: '' }
                 note.style = newColor
+                console.log(newColor)
             }
             note.style[field] = color;
         }
