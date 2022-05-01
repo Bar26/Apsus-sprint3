@@ -44,11 +44,11 @@ state={
     }
 
     render() {
-        return <section className="note-list main-layout">
+        return <section className="note-list grid main-layout">
         {/* Hello */}
         {this.props.notes.map(note => {
             if(this.props.isPinned===note.isPinned)
-            return <NotePreview loadNotes={this.props.loadNotes} note={note} key={note.id} onDupNote={this.props.onDupNote} onDeleteNote={this.props.onDeleteNote}/>
+            return <NotePreview handleDragStart={this.handleDragStart} onDrop= {this.handleOnDrop} onDragOver={(event)=>this.handleDragOver()} loadNotes={this.props.loadNotes} note={note} key={note.id} onDupNote={this.props.onDupNote} onDeleteNote={this.props.onDeleteNote}/>
         })}
     </section>
     }

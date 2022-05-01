@@ -1,17 +1,27 @@
 
 
 
-export function NoteTxt (props){
+export class NoteTxt extends React.Component {
     // console.log(props)
-    const title = props.note.info.title
-    const txt = props.note.info.txt
-    
-    function titleCheck(){
-        if(title) return <h1>{title}</h1>
+    state = {
+        editing: false,
+        // ** Initialize "text" property with empty string here
+        text: ''
     }
 
-    return <section className={props.note.id}>
-        {titleCheck()}
-        <h3 >{txt}</h3>
-    </section>
+    titleCheck() {
+        const title = this.props.note.info.title
+        if (title) return title
+    }
+
+    render() {
+        const txt = this.props.note.info.txt
+        return <section className={this.props.note.id}>
+            <h1>{this.titleCheck()}</h1>
+            <div className='note-txt'>
+                <h3 onClick={this.props.onTextClick}>{txt}</h3>
+            </div>
+        </section>
+    }
 }
+// onTextClick={this.onTextClick}

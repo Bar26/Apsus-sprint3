@@ -1,14 +1,18 @@
 
+
+ .note ul{
+    /* height: 2rem; */
+
+} 
 .todo-li{
     justify-content: space-between;
-    padding-right: 40px;
 }
 
 .todo-txt {
+    width: 100%;
     display: flex;
-    font-size: 1.5rem;
+    font-size: 0.9rem;
     align-self: flex-start;
-    /* flex-wrap: wrap; */
     word-break: break-all;
     margin-bottom: 0.5rem;
     cursor: pointer;
@@ -16,7 +20,8 @@
 
 .todo-delete{
     align-self: center;
-    padding-left: 1rem;
+    padding-right: 1rem;
+    width: 3rem;
 }
 .todo-delete i{
     cursor: pointer;
@@ -29,17 +34,16 @@
 }
 
 .todo-li input {
-    margin-top: 1.25rem;
+    margin-top: 0.5rem;
     background-color: transparent;
     border: none;
-    height: 2rem;
+    height: 0.5rem;
     width: 25rem;
 }
 
 .todo .li-to-scroll {
-    height: 10rem;
+    height: 8rem;
     overflow-y: auto;
-    /* background-color: yellowgreen; */
 }
 
 .todo .li-to-scroll::-webkit-scrollbar {

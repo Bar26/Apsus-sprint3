@@ -85,8 +85,13 @@ export class NotePreview extends React.Component {
     }
 
 
-    onEditNote = (bookId) => {
-
+    onTextClick = (ev, bookId) => {
+        console.log(event.path[0])
+        event.path[0]='';
+        let todo={txt:val,doneAt:null}
+        noteService.addTodo(noteId, todo);
+        event.target[0].value='';
+        this.props.loadNotes();
     }
 
     // handleStyleChange = (field, value) => {
@@ -103,8 +108,8 @@ export class NotePreview extends React.Component {
 
         // console.log(this.props.note)
         return <section style={style} className="note-preview"  >
-            <section draggable className="note" onDragStart={()=>this.props.handleDragStart(event,note)} >
-                <DynamicCmp loadNotes={this.props.loadNotes} onDeleteNote={this.props.onDeleteNote} note={this.props.note} type={type} />
+            <section draggable className="note" onDragStart={(event)=>this.props.handleDragStart(event,note)} >
+                <DynamicCmp onTextClick={(ev) => this.onTextClick(note)} loadNotes={this.props.loadNotes} onDeleteNote={this.props.onDeleteNote} note={this.props.note} type={type} />
             </section>
             <div className='note-preview-btn'>
                 <label className="palette-bgc" title="Set BGC Color">
@@ -148,10 +153,10 @@ function DynamicCmp(props) {
     switch (props.type) {
         case 'note-txt': {
             // console.log(props.note)
-            return <NoteTxt onDeleteNote={props.onDeleteNote} note={props.note} />
+            return <NoteTxt onTextClick={props.onTextClick} onDeleteNote={props.onDeleteNote} note={props.note} />
         }
         case 'note-img': {
-            return <NoteImg onDeleteNote={props.onDeleteNote} note={props.note} />
+            return <NoteImg  onDeleteNote={props.onDeleteNote} note={props.note} />
         }
         case 'note-todos': {
             return <NoteToDo loadNotes={props.loadNotes} onDeleteNote={props.onDeleteNote} note={props.note} />

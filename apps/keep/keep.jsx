@@ -80,12 +80,12 @@ export class Keep extends React.Component {
 
     render() {
         const { notes, inputType } = this.state;
-        return <section className='app-notes main-layout'>
-
+        return <section className='app-notes'>
             <section className='upper flex column'>
                 <NoteFilter onFilter={this.onFilter} onSerchFiter={this.onSerchFiter} />
                 <AddNote onCreate={this.onCreate} />
             </section>
+            <SideBar/>
 
             <section className='notes main-layout'>
                 <h1 className='notes-title-pin'>Pinned</h1>

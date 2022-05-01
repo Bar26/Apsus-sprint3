@@ -23,7 +23,7 @@ const gNotes = [
             txt: "Fullstack Me Baby!"
         },
         style: {
-            backgroundColor: "#dfa9a9",
+            backgroundColor: "#b8d9e0",
             color:"whitesmoke"
         }
 
