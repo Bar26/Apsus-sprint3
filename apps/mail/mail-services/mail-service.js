@@ -24,6 +24,42 @@ const loggedinUser = {
 
 const gMails = [
     {
+        id: 'e130',
+        subject: '#Fullstack Bootcamp',
+        body: 'You have a new mention in Coding Academy sit amet consectetur adipisicing elit. Voluptates magnam porro, dolorum est error fuga itaque minima veniam consectetur incidunt, doloremque dolorem! Qui culpa vitae voluptatem facilis et placeat praesentium',
+        isRead: false,
+        isStarred: false,
+        sentAt: Date.now(),
+        from: 'Slack',
+        to: 'user@appsus.com',
+        status: 'inbox',
+        labels: []
+    },
+    {
+        id: 'e131',
+        subject: 'Weeklt study reminder',
+        body: 'Bellow is a list of all studies that are currently available. dolor sit amet consectetur adipisicing elit. Voluptates magnam porro, dolorum est error fuga itaque minima veniam consectetur incidunt, doloremque dolorem! Qui culpa vitae voluptatem facilis et placeat praesentium',
+        isRead: false,
+        isStarred: false,
+        sentAt: Date.now(),
+        from: 'TAU Psychology',
+        to: 'user@appsus.com',
+        status: 'inbox',
+        labels: ['promotions']
+    },
+    {
+        id: 'e132',
+        subject: 'Introducing shapes',
+        body: 'Earlier this year, we launched Flows to make building user flows easier. You told us you love the snap connectors and locked screens. This month, we made Flows even better! Now, you have the ability to show conditional flows, alternate branches, and actions in Zeplin. Read more about our April product updates, including: Shapes.',
+        isRead: false,
+        isStarred: false,
+        sentAt: Date.now(),
+        from: 'Zeplin Crew',
+        to: 'user@appsus.com',
+        status: 'inbox',
+        labels: ['promotions']
+    },
+    {
         id: 'e101',
         subject: 'Miss you!',
         body: 'Would love to catch up sometimesipsum dolor sit amet consectetur adipisicing elit. Voluptates magnam porro, dolorum est error fuga itaque minima veniam consectetur incidunt, doloremque dolorem! Qui culpa vitae voluptatem facilis et placeat praesentium',
@@ -102,7 +138,7 @@ const gMails = [
         isRead: true,
         isStarred: false,
         sentAt: Date.now(),
-        from: 'Monica Geler',
+        from: 'Monica Geller',
         to: 'user@appsus.com',
         status: 'inbox',
         labels: ['friends']
@@ -122,7 +158,7 @@ const gMails = [
     {
         id: 'e105',
         subject: 'Sale- only today!',
-        body: 'Would love to catch up sometimesipsum dolor sit amet consectetur adipisicing elit. Voluptates magnam porro, dolorum est error fuga itaque minima veniam consectetur incidunt, doloremque dolorem! Qui culpa vitae voluptatem facilis et placeat praesentium ',
+        body: '50% off on all sometimesipsum dolor sit amet consectetur adipisicing elit. Voluptates magnam porro, dolorum est error fuga itaque minima veniam consectetur incidunt, doloremque dolorem! Qui culpa vitae voluptatem facilis et placeat praesentium ',
         isRead: true,
         isStarred: false,
         sentAt: 1251132930294,
@@ -221,7 +257,10 @@ function query(critirea) {
         mails = gMails
         storageService.saveToStorage(MAIL_KEY, mails)
     }
-
+    if (critirea.isStarred){
+        mails = mails.filter(mail => mail.isStarred)
+        return Promise.resolve(mails)
+    } 
     mails = mails.filter(mail => mail.status === critirea.status && (mail.body.includes(critirea.txt) ||
         mail.subject.includes(critirea.txt) || mail.from.includes(critirea.txt)))
     if (critirea.category) mails=mails.filter(mail=>mail.labels.includes(critirea.category))
@@ -230,7 +269,7 @@ function query(critirea) {
             return mail.isRead + '' === critirea.isRead
         })
     }
-    if (critirea.isStarred) mails = mails.filter(mail => mail.isStarred)
+
     return Promise.resolve(mails)
 }
 
@@ -239,6 +278,7 @@ function _createMail(to, subject, body, statusDraft) {
     let status
     if (!statusDraft) status = to + '' === 'user@appsus.com' ? 'inbox' : 'sent'
     else status = statusDraft
+    console.log(status,'from servie')
     const from = 'Lee Sadot'
     const sentAt = Date.now()
     const mail = {

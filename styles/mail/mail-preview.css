@@ -1,5 +1,8 @@
 .mail-list-container{
-    margin-inline-start: 20px;
+    padding-inline-start: 20px;
+    /* overflow-y: auto; */
+    overflow: hidden;
+    width: 100%;
 
     
 }
@@ -11,6 +14,9 @@
     padding: 0.315em;
     display: relative;
     justify-content: space-between;
+    padding-inline-end: 1.6rem;
+    position: relative;
+    
     
 }
 
@@ -26,7 +32,7 @@
 
 .mail.unRead{
     background-color: rgba(255, 255, 255, 0.548);
-    font-weight:550;
+    font-weight:600;
     
 
 }
@@ -35,6 +41,8 @@
     display: flex;
     justify-content: flex-start;
 }
+
+
 
 .mail>* {
     justify-content: flex-start;
@@ -54,16 +62,11 @@
 
 
 .choose-category{
-    /* position:relative;
-    right: 20%;
-    background-color: white;
-    top:20%;
-    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.057);
-    padding: 10px;
-    z-index: 30; */
+    
     position: absolute;
-    left:80%;
-    /* top:19%; */
+    left: 82%;
+    top:50%;
+    z-index: 30; 
     background: fixed;
     background-color: rgb(255, 255, 255);
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.257);
@@ -129,23 +132,28 @@
 
 
 .mail .from {
-    width: 6.25em;
+    width: 6em;
 }
 
 .mail .subject {
     width:15rem;
 }
 
-.mail .body {
-    width: 25em;
-    font-weight: 500;
+.mail .body{
+    /* font-weight: 600; */
+    /* color: var(--color1); */
+    width: 22em;
     color: rgb(105, 104, 104);
+
+}
+.mail.unRead .body {
+    font-weight: 500;
+
+}
+.mail.mail.unRead .date{
+    font-weight: 500;
 }
 
-.mail.unRead .body{
-    font-weight: 550;
-    color: var(--color1);
-}
 
 .mail .date{
     width: 5em;
@@ -167,4 +175,15 @@
 
 .sort-and-list{
     flex:1
+}
+
+.mail .date-btn-container{
+    align-items: center;
+    /* margin-inline-end: 1.6rem; */
+    justify-self: flex-end;
+}
+
+.mail .mail-content{
+    gap:30px;
+    align-items: center;
 }

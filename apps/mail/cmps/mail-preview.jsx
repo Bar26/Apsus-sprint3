@@ -4,7 +4,7 @@ import { Details } from "./Details.jsx"
 import { eventBusService } from "../../../services/event-bus-service.js"
 
 const { withRouter } = ReactRouterDOM;
-export class _MailPreview extends React.Component {
+ class _MailPreview extends React.Component {
 
 
     state = {
@@ -51,6 +51,7 @@ export class _MailPreview extends React.Component {
     render() {
         const { onUpdateMailCategory, onUpdateMailStatus, mail, onUpdateReadState, onUpdateStarredState } = this.props
         const date = new Date(mail.sentAt)
+        console.log(mail.subject)
         const now = new Date()
         let hours = date.getHours()
         if (hours < 10) hours = `0${hours}`
@@ -59,27 +60,38 @@ export class _MailPreview extends React.Component {
         const monthName = date.toLocaleString('default', { month: 'short' })
         const text = mail.body
         let dateToShow
+        const sub=mail.subject
+        console.log(sub)
 
         if ((date.getMonth() === now.getMonth()) && (date.getDate() === now.getDate()) && (date.getFullYear() === now.getFullYear())) {
             dateToShow = `${hours}:${minutes}`
         } else {
             dateToShow = `${date.getDate()} ${monthName}'`
         }
-        let className = (mail.isRead === false) ? 'mail flex align-center unRead' : 'mail flex align-center read'
+        let className = (mail.isRead === false) ? 'mail flex align-center unRead ' : 'mail flex align-center read'
 
         return <article className={className} >
-            <section className=" star-and-from flex">
-            <div className={`star-container flex ${mail.isStarred ? 'starred' : ''}`} onClick={() => onUpdateStarredState(mail)}></div>
-            <span className="from flex">{mail.from}</span></section>
-            <span className="subject flex">{mail.subject} </span>
-            <Link to={`/mail/${mail.id}`}><ShortenTxt text={text} /></Link>
-            <section className="date-btn-container flex">
-                <div className="dispare"><span className="date flex">{dateToShow}</span></div>
-                <div  title="convert to note"  className="send-note" onClick={() => this.onSendMailToNote(mail)}></div>
+            <Link to={`/mail/${mail.id}`}><section className="mail-content flex">
+                <section className=" star-and-from flex">
+                    <div className={`star-container flex ${mail.isStarred ? 'starred' : ''}`} onClick={() => onUpdateStarredState(mail)}></div>
+                    <span className="from flex">{mail.from}</span>
+                
+                </section>
+        
+                <span className="subject flex">{mail.subject}</span>
+            
+            
 
+                <ShortenTxt text={text} />
+            </section></Link>
+
+            <section className="date-btn-container flex">
+                <span className="date ">{dateToShow}</span>
+                <div  title="convert to note"  className="send-note" onClick={() => this.onSendMailToNote(mail)}></div>
                 <div  title="transfer to trash"  className="delete-container" onClick={() => onUpdateMailStatus(mail, 'trash')} ></div>
                 <div  title="label mail"  className="categories-container " onClick={this.onToggleChooseCategory}></div>
-            </section>
+        
+
             <section className="choose-category close " ref={this.inputRef4}>
                 <div className="choose-family" onClick={() => onUpdateMailCategory(mail, 'family')} >Family</div>
                 <div className="choose-friends" onClick={() => onUpdateMailCategory(mail, 'friends')}>Friends</div>
@@ -88,6 +100,7 @@ export class _MailPreview extends React.Component {
             </section>
 
             <div  title="mark as read\unread"  className={`read-container ${mail.isRead ? 'read' : ''}`} onClick={() => onUpdateReadState(mail)}></div>
+                </section>
         </article>
 
     }
